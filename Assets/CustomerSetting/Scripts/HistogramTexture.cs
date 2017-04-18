@@ -73,7 +73,7 @@ public class HistogramTexture : MonoBehaviour {
 			}
 			m_generatedTexture = _GenerateproduceTexture ();
 			if (iscanvas) {
-				GameObject.Find ("RawImage").GetComponent<RawImage> ().texture = m_generatedTexture; 
+				GameObject.Find ("Diagram").GetComponent<RawImage> ().texture = m_generatedTexture; 
 			} else {
 				material.SetTexture ("_MainTex", m_generatedTexture);
 			}
@@ -97,7 +97,7 @@ public class HistogramTexture : MonoBehaviour {
 		return proceduralTexture;
 	}
 	//update by frame
-	void Update(){
+/*	void Update(){
 		height = (int)(Random.value * 100);
 //		Debug.Log ("new hieght is "+height);
 		heights.Dequeue ();
@@ -108,21 +108,20 @@ public class HistogramTexture : MonoBehaviour {
 		} else {
 			material.SetTexture ("_MainTex", m_generatedTexture);
 		}
-	}
+	}*/
 	// combine with gesture detector
 	public void setHeight(float value){
-	/*	maxScore = value > maxScore ? value:maxScore;
+		maxScore = value > maxScore ? value:maxScore;
 		height = (int)(value*100);
 		heights.Dequeue ();
 		heights.Enqueue (height);
 		m_generatedTexture = _GenerateproduceTexture ();
 		Debug.Log ("maxScore is "+maxScore);
 		if (iscanvas) {
-			GameObject.Find ("RawImage").GetComponent<RawImage> ().texture = m_generatedTexture; 
+			GameObject.Find ("Diagram").GetComponent<RawImage> ().texture = m_generatedTexture; 
 		} else {
 			material.SetTexture ("_MainTex", m_generatedTexture);
 		}
 		height = 0f;
-		*/
 	}
 }
