@@ -95,18 +95,24 @@ private void GestureFrameArrived(object sender, VisualGestureBuilderFrameArrived
 					if (gesture.GestureType == GestureType.Discrete) { 
 						DiscreteGestureResult result = null; 
 						discreteResults.TryGetValue(gesture, out result); 
-
-							if (result.Confidence > 0.05) { 
+							if (gesture.Name == "point_right") {
+								GameObject.Find ("Border").GetComponent<HistogramTexture> ().setHeight (result.Confidence);
+							}
+							/*if (result.Confidence > 0.05) { 
 							// Fire Event 
-							if(OnGesture!=null){
-								Debug.Log("Detected Gesture " + gesture.Name + " with Confidence " + result.Confidence);
-								OnGesture(this,new KinectGestureEvent(gesture.Name, result.Confidence));	
-							} 
-						}
+								if(OnGesture!=null){
+								//	Debug.Log("Detected Gesture " + gesture.Name + " with Confidence " + result.Confidence);
+								//	OnGesture(this,new KinectGestureEvent(gesture.Name, result.Confidence));	
+								} 
+						}*/
 					} 
 				} 
 			} 
 		} 
 	}
 } 
+
+	//private void Setheight(value){
+	//	GameObject.Find ("Border").GetComponent<HistogramTexture> ().setHeight ();
+	//}
 }
