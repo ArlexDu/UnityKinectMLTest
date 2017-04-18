@@ -96,7 +96,7 @@ private void GestureFrameArrived(object sender, VisualGestureBuilderFrameArrived
 						DiscreteGestureResult result = null; 
 						discreteResults.TryGetValue(gesture, out result); 
 							if (gesture.Name == "point_right") {
-								GameObject.Find ("Border").GetComponent<HistogramTexture> ().setHeight (result.Confidence);
+								GameObject.Find ("CreateDiagram").GetComponent<HistogramTexture> ().setHeight (result.Confidence);
 							}
 							/*if (result.Confidence > 0.05) { 
 							// Fire Event 

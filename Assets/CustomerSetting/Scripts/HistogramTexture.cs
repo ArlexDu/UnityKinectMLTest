@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 //[ExecuteInEditMode]
 public class HistogramTexture : MonoBehaviour {
 
 	public Material material = null;
-
+	public bool iscanvas = false;
 	#region Material properties
 	[SerializeField,SetProperty("textureWidth")]
 	private int m_textureWidth = 100;
@@ -72,7 +72,11 @@ public class HistogramTexture : MonoBehaviour {
 				heights.Enqueue (1);
 			}
 			m_generatedTexture = _GenerateproduceTexture ();
-			material.SetTexture ("_MainTex", m_generatedTexture);
+			if (iscanvas) {
+				GameObject.Find ("RawImage").GetComponent<RawImage> ().texture = m_generatedTexture; 
+			} else {
+				material.SetTexture ("_MainTex", m_generatedTexture);
+			}
 		}
 	}
 		
@@ -92,25 +96,33 @@ public class HistogramTexture : MonoBehaviour {
 		proceduralTexture.Apply ();
 		return proceduralTexture;
 	}
-
-/*	void FixedUpdate(){
-//		int height = (int)(Random.value * 100);
+	//update by frame
+	void Update(){
+		height = (int)(Random.value * 100);
 //		Debug.Log ("new hieght is "+height);
 		heights.Dequeue ();
 		heights.Enqueue (height);
 		m_generatedTexture = _GenerateproduceTexture ();
-		material.SetTexture ("_MainTex", m_generatedTexture);
-		height = 0f;
-	}*/
-
+		if (iscanvas) {
+			GameObject.Find ("RawImage").GetComponent<RawImage> ().texture = m_generatedTexture; 
+		} else {
+			material.SetTexture ("_MainTex", m_generatedTexture);
+		}
+	}
+	// combine with gesture detector
 	public void setHeight(float value){
-		maxScore = value > maxScore ? value:maxScore;
+	/*	maxScore = value > maxScore ? value:maxScore;
 		height = (int)(value*100);
 		heights.Dequeue ();
 		heights.Enqueue (height);
 		m_generatedTexture = _GenerateproduceTexture ();
-		material.SetTexture ("_MainTex", m_generatedTexture);
-		height = 0f;
 		Debug.Log ("maxScore is "+maxScore);
+		if (iscanvas) {
+			GameObject.Find ("RawImage").GetComponent<RawImage> ().texture = m_generatedTexture; 
+		} else {
+			material.SetTexture ("_MainTex", m_generatedTexture);
+		}
+		height = 0f;
+		*/
 	}
 }
