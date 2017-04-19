@@ -9,7 +9,7 @@ public class HistogramTextureEditor : Editor {
 		var myscript = target as HistogramTexture;
 		myscript.iscanvas = EditorGUILayout.Toggle ("Is Canvas",myscript.iscanvas);
 		if (!myscript.iscanvas) {
-			EditorGUILayout.ObjectField("material",myscript.material,typeof(Material));
+			myscript.material = (Material)EditorGUILayout.ObjectField("material",myscript.material,typeof(Material));
 		}
 		myscript.textureWidth = EditorGUILayout.IntField ("Texture Width",myscript.textureWidth);
 		myscript.rectangleColor = EditorGUILayout.ColorField ("Rectangle Color",myscript.rectangleColor);
