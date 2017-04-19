@@ -104,7 +104,7 @@ public class HistogramTexture : MonoBehaviour {
 		heights.Enqueue (height);
 		m_generatedTexture = _GenerateproduceTexture ();
 		if (iscanvas) {
-			GameObject.Find ("RawImage").GetComponent<RawImage> ().texture = m_generatedTexture; 
+			GameObject.Find ("Diagram").GetComponent<RawImage> ().texture = m_generatedTexture; 
 		} else {
 			material.SetTexture ("_MainTex", m_generatedTexture);
 		}

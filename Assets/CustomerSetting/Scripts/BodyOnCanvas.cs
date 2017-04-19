@@ -7,7 +7,7 @@ public class BodyOnCanvas : MonoBehaviour
 {
 	public Material BoneMaterial;
 	public GameObject BodySourceManager;
-
+	public Transform BodyPosition;
 	private Dictionary<ulong, GameObject> _Bodies = new Dictionary<ulong, GameObject>();
 	private BodySourceManager _BodyManager;
 
@@ -110,17 +110,19 @@ public class BodyOnCanvas : MonoBehaviour
 	private GameObject CreateBodyObject(ulong id)
 	{
 		GameObject body = new GameObject("Body:" + id);
-
+		//change position
+		body.transform.position = BodyPosition.position;
 		for (Kinect.JointType jt = Kinect.JointType.SpineBase; jt <= Kinect.JointType.ThumbRight; jt++)
 		{
 			GameObject jointObj = GameObject.CreatePrimitive(PrimitiveType.Cube);
-
+			//add customize layer
+			jointObj.layer = LayerMask.NameToLayer ("KinectBody");
 			LineRenderer lr = jointObj.AddComponent<LineRenderer>();
 			lr.SetVertexCount(2);
 			lr.material = BoneMaterial;
 			lr.SetWidth(0.05f, 0.05f);
 
-			jointObj.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+			jointObj.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
 			jointObj.name = jt.ToString();
 			jointObj.transform.parent = body.transform;
 		}
@@ -146,8 +148,9 @@ public class BodyOnCanvas : MonoBehaviour
 			LineRenderer lr = jointObj.GetComponent<LineRenderer>();
 			if(targetJoint.HasValue)
 			{
-				lr.SetPosition(0, jointObj.localPosition);
-				lr.SetPosition(1, GetVector3FromJoint(targetJoint.Value));
+				//change position
+				lr.SetPosition(0, jointObj.localPosition+BodyPosition.position);
+				lr.SetPosition(1, GetVector3FromJoint(targetJoint.Value)+BodyPosition.position);
 				lr.SetColors(GetColorForState (sourceJoint.TrackingState), GetColorForState(targetJoint.Value.TrackingState));
 			}
 			else
