@@ -17,6 +17,8 @@ public class HeadColorView : MonoBehaviour
 		{
 			gameObject.GetComponent<Renderer>().material.SetTexture("_MainTex", renderTexture);
 			//GameObject.Find("HeadImage").GetComponent<RawImage>().material.SetTexture("_MainTex", renderTexture);
+		} else {
+			Debug.LogError ("Texture is null !");
 		}
 		keys = ColorSourceManager.GetComponent<HeadShowManager> ().GetKey();
 		if (keys != null) {

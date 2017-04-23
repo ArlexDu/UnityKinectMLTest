@@ -12,9 +12,10 @@ public class TrackHeadColorView : MonoBehaviour
     {
 		ReleaseBuffers ();
 		Texture2D renderTexture = ColorSourceManager.GetComponent<HeadShowManager>().GetColorTexture();
-		if (renderTexture != null)
-		{
-			gameObject.GetComponent<Renderer>().material.SetTexture("_MainTex", renderTexture);
+		if (renderTexture != null) {
+			gameObject.GetComponent<Renderer> ().material.SetTexture ("_MainTex", renderTexture);
+		} else {
+			Debug.LogError ("Texture is null !");
 		}
 		mask = ColorSourceManager.GetComponent<HeadShowManager> ().GetMask ();
 	//	Debug.Log ("mask length is "+mask.Length);
